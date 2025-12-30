@@ -1,7 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const { Car } = require("./model");
-require("./db/addData");
+const { dbConn } = require("./conn");
+
+dbConn();
 
 const PORT = process.env.PORT || 3000;
 const app = express();

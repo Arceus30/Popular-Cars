@@ -1,4 +1,3 @@
-const cron = require("node-cron");
 const { carBodies } = require("../carBodies");
 const { dbConn } = require("./conn");
 const { Car } = require("../model");
@@ -41,5 +40,3 @@ const main = async () => {
         console.log("Error Occured", err);
     }
 };
-
-cron.schedule("30 11 * * *", main);
