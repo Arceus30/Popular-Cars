@@ -42,4 +42,4 @@ const main = async () => {
     }
 };
 
-cron.schedule("0 6 * * *", main);
+cron.schedule("25 21 * * *", main);
