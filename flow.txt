@@ -1,0 +1,12 @@
+1.) Add data to database
+2.) Fetch Data from database and show it to user
+
+Adding Data to the Database
+1.) Loop over the Car Bodies array
+2.) Fetch Car Models for every car body type (fetch car model list by car body type)
+3.) Find interest score for every model
+4.) Find display picture for every model
+5.) Add every model in the db
+
+Fetching Database from the database
+1.) Sort them on interest score and group them based on car body type
