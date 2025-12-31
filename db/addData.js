@@ -13,7 +13,7 @@ const main = async () => {
         console.log(`Adding Data ${date}`);
         let data = [];
         // for (body of carBodies) {
-        for (const body of carBodies.slice(0, 2)) {
+        for (const body of carBodies) {
             let bodyMakeModels = await fetchCarModel(body, year);
             // for (cmm of bodyMakeModels) {
             for (const cmm of bodyMakeModels.slice(0, 2)) {
@@ -45,4 +45,4 @@ const main = async () => {
 // main();
 // cron.schedule("0 10 * * *", main);
 
-cron.schedule("45 4 * * *", main); // Render
+cron.schedule("0 5 * * *", main); // Render
