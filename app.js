@@ -13,7 +13,9 @@ app.use(cors());
 
 app.get("/popular-cars/api", async (req, res, next) => {
     try {
-        const { q = "hatchback" } = req.query;
+        const q = req.query.q?.toString().trim() || "hatchback";
+
+        console.log(q);
         const carsFound = await Car.find({ bodyType: q.toLowerCase() }).sort({
             interestScore: -1,
         });
