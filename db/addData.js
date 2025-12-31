@@ -4,20 +4,16 @@ const { dbConn } = require("./conn");
 const { Car } = require("../model");
 const { fetchCarModel, fetchModelInterest } = require("./utils");
 
-dbConn();
-
-const main = async () => {
+const addData = async () => {
     try {
         const date = new Date();
         const year = date.getFullYear();
         console.log(`Adding Data ${date}`);
-        
+
         // Commented to stop auto api calls
         // let data = [];
-        // for (body of carBodies) {
         // for (const body of carBodies) {
-        //     let bodyMakeModels = await fetchCarModel(body, year);
-        //     // for (cmm of bodyMakeModels) {
+        // let bodyMakeModels = await fetchCarModel(body, year);
         //     for (const cmm of bodyMakeModels.slice(0, 2)) {
         //         const mm = cmm.make + " " + cmm.model;
         //         const interest = await fetchModelInterest(mm);
@@ -42,6 +38,11 @@ const main = async () => {
     } catch (err) {
         console.log("Error Occured", err);
     }
+};
+
+const main = async () => {
+    await dbConn();
+    await addData();
 };
 
 // main();
