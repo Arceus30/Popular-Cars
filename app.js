@@ -13,8 +13,8 @@ app.use(cors());
 
 app.get("/popular-cars/api", async (req, res, next) => {
     try {
-        const { q = "Hatchback" } = req.query;
-        const carsFound = await Car.find({ bodyType: q }).sort({
+        const { q = "hatchback" } = req.query;
+        const carsFound = await Car.find({ bodyType: q.toLowerCase() }).sort({
             interestScore: -1,
         });
         const numCars = carsFound.length;
