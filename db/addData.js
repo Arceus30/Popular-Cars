@@ -4,7 +4,9 @@ const { dbConn } = require("./conn");
 const { Car } = require("../model");
 const { fetchCarModel, fetchModelInterest } = require("./utils");
 
-const addData = async () => {
+dbConn();
+
+const main = async () => {
     try {
         const date = new Date();
         const year = date.getFullYear();
@@ -40,12 +42,7 @@ const addData = async () => {
     }
 };
 
-const main = async () => {
-    await dbConn();
-    await addData();
-};
-
 // main();
 // cron.schedule("0 10 * * *", main);
 
-cron.schedule("*/5 * * * *", main); // Render
+cron.schedule("* * * * *", main); // Render
