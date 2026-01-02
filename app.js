@@ -14,8 +14,6 @@ app.use(cors());
 app.get("/popular-cars/api", async (req, res, next) => {
     try {
         const q = req.query.q?.toString().trim() || "hatchback";
-
-        console.log(q);
         const carsFound = await Car.find({ bodyType: q.toLowerCase() }).sort({
             interestScore: -1,
         });
@@ -23,11 +21,12 @@ app.get("/popular-cars/api", async (req, res, next) => {
         if (!carsFound || !carsFound.length) {
             return res
                 .status(404)
-                .json({ success: false, message: "No cars Found" });
+                .json({ date1: new Date(), success: false, message: "No cars Found" });
         }
 
         return res.status(200).json({
             success: true,
+            date: new Date(),
             message: `${numCars} Cars Found`,
             cars: carsFound,
         });
