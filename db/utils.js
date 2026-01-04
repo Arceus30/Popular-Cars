@@ -127,8 +127,6 @@ const getImage = async () => {
     }
 };
 
-getImage();
-
 module.exports = {
     fetchCarModel,
     fetchModelInterest,
