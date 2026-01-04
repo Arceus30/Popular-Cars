@@ -16,7 +16,7 @@ const addData = async () => {
             for (const cmm of bodyMakeModels.slice(0, 2)) {
                 const mm = cmm.make + " " + cmm.model;
                 const interest = await fetchModelInterest(mm);
-                const imageURL = await getImage();
+                const imageURL = await getImage(mm);
                 const price = Math.floor(Math.random() * 50000) + 20000;
                 data.push({
                     make: cmm.make,
