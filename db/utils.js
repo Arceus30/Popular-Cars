@@ -107,7 +107,28 @@ const fetchModelInterest = async (mm) => {
     }
 };
 
+const getImage = async () => {
+    try {
+        const accessKey = process.env.UNSPLASH_ACCESS_KEY;
+        const res = await axios.get("https://api.unsplash.com/photos/random", {
+            params: {
+                query: "car",
+                count: 1,
+            },
+            headers: {
+                Authorization: `Client-ID ${accessKey}`,
+            },
+        });
+        const photo = Array.isArray(res.data) ? res.data[0] : res.data;
+        return photo.urls.reguler;
+    } catch (e) {
+        console.log(e);
+        throw e;
+    }
+};
+
 module.exports = {
     fetchCarModel,
     fetchModelInterest,
+    getImage,
 };
