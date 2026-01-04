@@ -1,8 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const { Car } = require("./model");
+const { dbConn } = require("./db/conn");
+const { addData } = require("./db/addData");
 
-require("./db/addData");
+dbConn();
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -21,7 +23,11 @@ app.get("/popular-cars/api", async (req, res, next) => {
         if (!carsFound || !carsFound.length) {
             return res
                 .status(404)
-                .json({ date1: new Date(), success: false, message: "No cars Found" });
+                .json({
+                    date1: new Date(),
+                    success: false,
+                    message: "No cars Found",
+                });
         }
 
         return res.status(200).json({
@@ -30,6 +36,16 @@ app.get("/popular-cars/api", async (req, res, next) => {
             message: `${numCars} Cars Found`,
             cars: carsFound,
         });
+    } catch (e) {
+        next(e);
+    }
+});
+
+app.get("/cron-job", async (req, res, next) => {
+    try {
+        console.log("Cron-Job Started");
+        await addData();
+        return res.status(200).json({ status: "success" });
     } catch (e) {
         next(e);
     }

@@ -10,3 +10,8 @@ Adding Data to the Database
 
 Fetching Database from the database
 1.) Sort them on interest score and group them based on car body type
+
+
+Next:
+1.) Date and Time in Response
+2.) Frontend: API fetching data from the db and show the data in tabs, similar to carweek.

@@ -1,17 +1,15 @@
 const mongoose = require("mongoose");
 
 const dbConn = async () => {
-    mongoose
-        .connect(
+    try {
+        await mongoose.connect(
             process.env.MONGO_CONNECT_STRING ||
                 "mongodb://localhost:27017/CarTrends"
-        )
-        .then(() => {
-            console.log(`Server Database Connected`);
-        })
-        .catch((err) => {
-            console.log(`Server database connection error: ${err}`);
-        });
+        );
+        console.log("Server Database Connected successfully");
+    } catch (err) {
+        console.error("Server database connection error:", err.message);
+    }
 };
 
 module.exports = { dbConn };
