@@ -120,12 +120,14 @@ const getImage = async () => {
             },
         });
         const photo = Array.isArray(res.data) ? res.data[0] : res.data;
-        return photo.urls.reguler;
+        return photo.urls.regular;
     } catch (e) {
         console.log(e);
         throw e;
     }
 };
+
+getImage();
 
 module.exports = {
     fetchCarModel,
