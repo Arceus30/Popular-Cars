@@ -21,13 +21,11 @@ app.get("/popular-cars/api", async (req, res, next) => {
         });
         const numCars = carsFound.length;
         if (!carsFound || !carsFound.length) {
-            return res
-                .status(404)
-                .json({
-                    date1: new Date(),
-                    success: false,
-                    message: "No cars Found",
-                });
+            return res.status(404).json({
+                date1: new Date(),
+                success: false,
+                message: "No cars Found",
+            });
         }
 
         return res.status(200).json({
@@ -44,7 +42,7 @@ app.get("/popular-cars/api", async (req, res, next) => {
 app.get("/cron-job", async (req, res, next) => {
     try {
         console.log("Cron-Job Started");
-        await addData();
+        // await addData();
         return res.status(200).json({ status: "success" });
     } catch (e) {
         next(e);

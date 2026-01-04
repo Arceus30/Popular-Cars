@@ -3,7 +3,7 @@ const axios = require("axios");
 const fs = require("fs").promises;
 const { getJson } = require("serpapi");
 
-async function fetchCarModelPage(year, body, page) {
+const fetchCarModelPage = async (year, body, page) => {
     const options = {
         method: "GET",
         url: process.env.FETCH_MODELS,
@@ -26,9 +26,9 @@ async function fetchCarModelPage(year, body, page) {
     } catch (error) {
         throw error;
     }
-}
+};
 
-async function fetchCarModel(body, year) {
+const fetchCarModel = async (body, year) => {
     try {
         let allItems = [];
         let page = 1;
@@ -63,9 +63,9 @@ async function fetchCarModel(body, year) {
     } catch (error) {
         throw error;
     }
-}
+};
 
-function calculateAverage(timeline_data) {
+const calculateAverage = (timeline_data) => {
     const values = timeline_data?.map(
         (item) => item.values[0]?.extracted_value
     );
@@ -74,7 +74,7 @@ function calculateAverage(timeline_data) {
 
     const sum = values.reduce((acc, val) => acc + val, 0);
     return sum / values.length;
-}
+};
 
 const fetchModelInterest = async (mm) => {
     try {
