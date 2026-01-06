@@ -21,6 +21,7 @@ const getFormattedDate = () =>
 
 app.get("/popular-cars/api", async (req, res, next) => {
     try {
+        console.log("API Request Recieved: ", new Date().toLocaleString());
         const q = req.query.q?.toString().trim() || "hatchback";
         const carsFound = await Car.find({ bodyType: q.toLowerCase() }).sort({
             interestScore: -1,
@@ -47,7 +48,7 @@ app.get("/popular-cars/api", async (req, res, next) => {
 
 app.get("/cron-job", async (req, res, next) => {
     try {
-        console.log("Cron-Job Started");
+        console.log("Cron Job Request Recieved: ", new Date().toLocaleString());
         // await addData();
         return res.status(200).json({ status: "success" });
     } catch (err) {
