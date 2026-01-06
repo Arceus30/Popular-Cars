@@ -4,24 +4,21 @@ const fs = require("fs").promises;
 const { getJson } = require("serpapi");
 
 const fetchCarModelPage = async (year, body, page) => {
-    const options = {
-        method: "GET",
-        url: process.env.FETCH_MODELS,
-        params: {
-            sort: "id",
-            verbose: "yes",
-            direction: "asc",
-            year,
-            type: body,
-            page,
-        },
-        headers: {
-            "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
-            "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
-        },
-    };
     try {
-        const response = await axios.request(options);
+        const response = await axios.get(process.env.FETCH_MODELS, {
+            params: {
+                sort: "id",
+                verbose: "yes",
+                direction: "asc",
+                year,
+                type: body,
+                page,
+            },
+            headers: {
+                "x-rapidapi-key": process.env.X_RAPIDAPI_KEY,
+                "x-rapidapi-host": process.env.X_RAPIDAPI_HOST,
+            },
+        });
         return response.data;
     } catch (error) {
         throw error;
@@ -101,9 +98,9 @@ const fetchModelInterest = async (mm) => {
             );
         });
         return result;
-    } catch (error) {
+    } catch (err) {
         console.error(`Error in fetching the interest ${error}`);
-        throw error;
+        throw err;
     }
 };
 

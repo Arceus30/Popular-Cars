@@ -24,4 +24,4 @@ async function fetchData() {
     }
 }
 
-fetchData();
+// fetchData();

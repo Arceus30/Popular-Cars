@@ -9,7 +9,6 @@ const addData = async () => {
         const year = date.getFullYear();
         console.log(`Adding Data ${date}`);
 
-        // Commented to stop auto api calls
         let data = [];
         for (const body of carBodies) {
             let bodyMakeModels = await fetchCarModel(body, year);

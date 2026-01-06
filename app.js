@@ -13,6 +13,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 
+const getFormattedDate = () =>
+    new Date().toLocaleString("en-GB", {
+        timeZone: "Asia/Kolkata",
+        hour12: false,
+    });
+
 app.get("/popular-cars/api", async (req, res, next) => {
     try {
         const q = req.query.q?.toString().trim() || "hatchback";
@@ -22,7 +28,7 @@ app.get("/popular-cars/api", async (req, res, next) => {
         const numCars = carsFound.length;
         if (!carsFound || !carsFound.length) {
             return res.status(404).json({
-                date1: new Date(),
+                date: getFormattedDate(),
                 success: false,
                 message: "No cars Found",
             });
@@ -30,12 +36,12 @@ app.get("/popular-cars/api", async (req, res, next) => {
 
         return res.status(200).json({
             success: true,
-            date: new Date(),
+            date: getFormattedDate(),
             message: `${numCars} Cars Found`,
             cars: carsFound,
         });
-    } catch (e) {
-        next(e);
+    } catch (err) {
+        next(err);
     }
 });
 
@@ -44,14 +50,17 @@ app.get("/cron-job", async (req, res, next) => {
         console.log("Cron-Job Started");
         // await addData();
         return res.status(200).json({ status: "success" });
-    } catch (e) {
-        next(e);
+    } catch (err) {
+        next(err);
     }
 });
 
 app.use((err, req, res, next) => {
     console.log(err);
-    return res.status(500).json({ message: "Internal Server Error" });
+    return res.status(500).json({
+        date: new Date.now().toLocaleString(),
+        message: "Internal Server Error",
+    });
 });
 
 app.listen(PORT, () => {
